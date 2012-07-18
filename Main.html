@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt">
+<head>
+<title>Page</title>
+<meta name="description" content="Breve descrição da página">
+<meta name="keywords" content="Palavras chave da página">
+  <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" type="text/css" href="css/White.css" />
+  <link rel="Stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/blitzer/jquery-ui.css"/>
+ 
+</head> 
+<body> 
+
+
+</div>
+   <div class="container">  <div id="header">
+   <div style="float: left; font-size: 15px; padding: 20px; font-family: Syncopate,Calibri, Arial; color: gold;" id="text"> Title Text </div>
+  </div>
+
+		
+	
+		
+
+	
+   
+
+<div class="clear"></div>
+<div class="item-1">
+
+<br>
+  <br><br>
+   <ul class="ContentContainer" id="ul1">
+	
+   <ul>
+<div class="clear"></div>
+</div>
+<div class="item-2">
+
+ 
+
+</div>
+<div class="item-3">
+
+ <br><br><br>
+	<ul class="ContentContainer" id="ul2">
+	
+   <ul>
+
+<div class="clear"></div>
+</div>
+
+
+<div class="clear"></div>
+ <div id="footer"> <div style="float: left; font-size: 15px; padding: 20px; font-family: Syncopate,Calibri, Arial; color: gold;"> Footer Text </div>
+  </div>
+
+
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>  
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.js"></script> 
+<script src="jquery.corner.js"></script> 
+<script src="log.js"></script> 
+<script src="menu.js"></script> 
+<script>
+
+	              
+	$('#text').hover(function () {
+        $(this).effect("explode", { pieces: 16 }, 1400, callback_); 
+    });
+           
+    function callback_() {
+        $("#text").hide().fadeIn();
+        $("#text").fadeIn('slow');
+    };
+		
+	
+
+   
+	$(".item-2").corner("10px"); 
+	
+	
+/*
+	<option value="blind">Blind</option>
+	<option value="bounce">Bounce</option>
+	<option value="clip">Clip</option>
+	<option value="drop">Drop</option>
+	<option value="explode">Explode</option>
+	<option value="fold">Fold</option>
+	<option value="highlight">Highlight</option>
+	<option value="puff">Puff</option>
+	<option value="pulsate">Pulsate</option>
+	<option value="scale">Scale</option>
+	<option value="shake">Shake</option>
+	<option value="size">Size</option>
+	<option value="slide">Slide</option>
+	*/
+	
+	function dynamicLoadPage(event)
+	{
+		var $this = $(event.data.element);
+		var path =  'pages/{0}.htm'.formatString($this.attr('rel'));
+		
+		var $container = $('.item-2');
+		$container.hide("drop", {}, 900).empty();
+		$container.load(path).show("drop", {direction:'right'}, 900);
+	}
+	
+	function AjaxFailed (error) 
+	{ 
+		alert(JSON.stringify(error));                
+	}
+			
+			function LoadMenu(ulID,file,options){
+				$.ajax({
+					url:        file,
+					dataType:   "json", 
+					success:    function(data){
+						var $this = $(ulID);
+						$.each(data.d, function(key, val) {
+							$this.append('<li rel="' + val.link + '">' +  val.title + '</li>');
+						});
+						$this.menu(options);
+					},
+					error:    AjaxFailed
+				});
+			}
+	
+	LoadMenu("#ul1",'menuleft.json',{clickEvent:dynamicLoadPage});
+	LoadMenu("#ul2",'menuright.json',{paddingDirection:'Left',clickEvent:dynamicLoadPage});
+	
+	
+</script>
+</body>
+</html>
