@@ -1,7 +1,7 @@
 ﻿html, body{height: 100%;width: 100%;border-style:none;color:  #333;background-color: #333;font-size: 13px;font-family: Calibri, Arial;padding: 0;margin: 0;border-style: none; overflow: auto;height:100%; min-width:900px;}
 img{border: 0px;border-style: none;}
 image{border: 0px;border-style: none;}
-
+.Bigtext{float: left; font-size: 15px; padding: 20px; font-family: Syncopate,Calibri, Arial; color: gold;}
 ul.ContentContainer {list-style-type: none;}
 ul.ContentContainer{width:200px;margin: 0;padding:0;}
 ul.ContentContainer li  { padding: 15px;background-color: gray;color:#333;margin:0.9px; border:1px solid whitesmoke;text-transform:capitalize;border-Color: whitesmoke;}
@@ -18,7 +18,7 @@ overflow: hidden;
 margin: 0;
 padding: 0;
 width: 0;
-line-height: 0;
+line-height: 0; 
 }
 
 div.container {

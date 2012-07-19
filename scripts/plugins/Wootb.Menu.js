@@ -1,15 +1,17 @@
-﻿
+﻿/*!
+ * Examples at: http://www.weboutofthebox.com/Content/pt-PT/43/2012/45/jqueryWOOTBMenu
+ * version 1.00 (18-JUN-2012)
+ * Requires jQuery v1.7.2 (tested in 1.7.2) or later
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ * Authors: David Viegas
+ */
 
-
-String.prototype.format = String.prototype.formatString = function() { 
-    var s = this, 
-        i = arguments.length; 
-     while (i--) { 
-        s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]); 
-    } 
-    return s; 
-}; 
-
+/**
+ *  menu() takes a options argument specified in the code below in settings : $this.menu(options);
+ *
+*/
 
 (function($){ 
 	 $.fn.menu = function(options) {
@@ -17,7 +19,7 @@ String.prototype.format = String.prototype.formatString = function() {
 	 var rendered = false;
 	
 	 function Clickcallback(){ alert("Event"); }
-	 function Hovercallback(){ console.log("hover event"); }
+
 	
 	 // opções padrão
      var settings = {
@@ -56,25 +58,25 @@ String.prototype.format = String.prototype.formatString = function() {
 		var $list = this.find('li');
 		if(settings.paddingDirection==='Right')
 		{
-			$list.filter(':visible:first').corner("tl");
-			$list.filter(':visible:last').corner("bl");
+			if(settings.corner)
+			{
+				$list.filter(':visible:first').WootbCorner({tr:"9px",tl:"19px"});
+				$list.filter(':visible:last').WootbCorner({br:"1em",bl:"2em"});
+			}
+			$(this).css("text-align","right");
 		}
-		else 
+		
+		if(settings.paddingDirection==='Left') 
 		{
-			$list.filter(':visible:first').corner("tr");
-			$list.filter(':visible:last').corner("br");
+			if(settings.corner)
+			{
+				$list.filter(':visible:first').WootbCorner({tr:"19px",tl:"9px"});
+				$list.filter(':visible:last').WootbCorner({bl:"1em",br:"2em"});
+			}
+			$(this).css("text-align","left");
 		}
 	}
-		if(settings.paddingDirection==='Right')
-			$(this).css("text-align","right");
-		if(settings.paddingDirection==='Left')
-			$(this).css("text-align","left");
-			
-		function clickhander(element)
-		{
-			settings.clickEvent.call($(element.data.element));
-		}
-			
+		
       return this.find('li').each(function(){
 		var $this =  $(this);
 		
@@ -86,10 +88,8 @@ String.prototype.format = String.prototype.formatString = function() {
 		$this.fadeOut(settings.effectSpeed).delay(settings.timeBetween * timer);
         $this.fadeIn(settings.effectSpeed);
 		timer++;
-		
-		
-		
-		$this.live("click", {element: this}, clickhander);
+	
+		$this.bind("click", {element: this},  settings.clickEvent);
 				
 		if(settings.useArrows){
 			if(settings.paddingDirection==='Right')
