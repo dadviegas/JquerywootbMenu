@@ -1,3 +1,5 @@
+www.weboutofthebox.com
+
 Web out of the box html Template.
 
 In this example json is used to add the menu items dynamically.
